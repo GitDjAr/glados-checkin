@@ -1,0 +1,33 @@
+name: glados-checkin
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron:  0 16 * * * 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Python
+      run: |
+        sudo apt update && \
+        sudo apt install python3
+      
+    - name: requirements
+      run: |
+        pip3 install -r requirements.txt
+        
+    - name: Checkin
+      run: |
+        python3 checkin.py 
+      env: 
+        SERVE: ${{ off}}
+        SCKEY: ${{ SCU139493Tdaddc3938db2222568fcc54fe0b1def05fe728b332788 }}
+        COOKIE: ${{ _octo=GH1.1.382650631.1612787978; _device_id=b2c8e6ffea64f8538abcda0385756f63; user_session=zLlg-YxTZ5WYG8dlIOg2jppnmx8FAW9YmoUV2ZthMhC7Dfgr; __Host-user_session_same_site=zLlg-YxTZ5WYG8dlIOg2jppnmx8FAW9YmoUV2ZthMhC7Dfgr; logged_in=yes; dotcom_user=GitDjAr; has_recent_activity=1; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _gh_sess=EK7F2mwzvbdW9kzvco85JDNii6xNg5vJk1I4%2BpNL737YwVXotEI3%2BE5sGTSDFzJIWrCH%2Bn9F1nz8Y4zc2cQYedNo58UtkNrzZSDQib24vThI7hSnn0sBJDpC6shFw0J6y4i3NLlgYxYbgqXaVTqVxN47ZETlTcmaECOV7mY60v%2Be3Nh%2Frn%2FhwWLDU6qAcjW50ja86ONoccDoc8YR1iDBqo940tnJQt8ZwZn3ad7elG87qbO9lGElF5MrJhm2mYq45W3ouA%3D%3D--QRwboXopyNeXxpmt--l0wvjkGcVj%2FVdomcCIHpnQ%3D%3D }}
